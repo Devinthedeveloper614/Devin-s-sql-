@@ -4,7 +4,7 @@
   
 ## Description:
 
-Thomas & Friends SQL: Employee Tracker is 'Thomas' and 'Tom' themed SQL employee data base tracker of Thomas Calle's(thats me by the way) fantasy employee famous fictional, non-fictional, characters, celebrities, significant figures team. The interfaces allows non-developers to easily view and interact with information through the command-line of the application stored in an SQL Employee Tracker database. 
+ The interfaces allows non-developers to easily view and interact with information through the command-line of the application stored in an SQL Employee Tracker database. 
 
 ## Table of Contents:
 - [Overview](#Overview)
@@ -56,12 +56,12 @@ THEN I am prompted to select an employee to update and their new role and this i
 ![](./assets/images/Demo.GIF)
 
 ## Usage Instructions
-1. Open the content management systems (CMS) named "Thomas & Friends SQL Employee Tracker".
-2. Open 'Intergrated Terminal' on 'server.js' and enter 'node server.js'
-3. Use the 'UP' and 'DOWN' arrow keys to navigate the command line. 
-4. Click 'enter' or 'return' on your respective choice.
-5. Follow all commad line prompts as directed until desired choice has been met.
-6. Additionally, for more in-depth instructions [Click Here to Watch.](https://www.youtube.com/watch?v=m9CQxR0AfiQ)
+
+ Open 'Intergrated Terminal' on 'server.js' and enter 'node server.js'
+ Use the 'UP' and 'DOWN' arrow keys to navigate the command line. 
+ Click 'enter' or 'return' on your respective choice.
+ Follow all commad line prompts as directed until desired choice has been met.
+ Additionally, for more in-depth instructions [Click Here to Watch.]
 
 ## Repository Link:
 
@@ -71,7 +71,7 @@ THEN I am prompted to select an employee to update and their new role and this i
 
 
 ## Installation Process
-1. Clone or download the zip.folder of the repository: [Thomas' SQL Employee Tracker](https://github.com/ThomasCalle/Thomas-SQL-Employee-Tracker)
+
 2. Install the following: 
 - Inquirer.js: [Version 8.2.4](https://www.npmjs.com/package/inquirer/v/8.2.4)
 - MySQL2: [Version 3.1.2](https://www.npmjs.com/package/mysql2)
