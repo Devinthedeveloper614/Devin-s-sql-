@@ -55,7 +55,7 @@ THEN I am prompted to select an employee to update and their new role and this i
 
 
 ## Usage Instructions
-1. Open the content management systems (CMS) named "Thomas & Friends SQL Employee Tracker".
+1. Open the content management systems (CMS) 
 2. Open 'Intergrated Terminal' on 'server.js' and enter 'node server.js'
 3. Use the 'UP' and 'DOWN' arrow keys to navigate the command line. 
 4. Click 'enter' or 'return' on your respective choice.
@@ -65,8 +65,8 @@ THEN I am prompted to select an employee to update and their new role and this i
 ## Repository Link:
 
 
-## YouTube Walkthrough Video:
-
+## Walkthrough Video:
+https://www.loom.com/share/18dc9a6033754f40a60f2a502c550895?sid=1529343d-fc72-4f94-bfe2-3106a8f4529e
 
 ## Screenshots.
 ### Figure 1. Command line interface
