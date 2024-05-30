@@ -92,7 +92,7 @@ function start() {
 
 // Function to view all departments
 function viewAllDepartments() {
-    const query = "SELECT * FROM employeetracker_db.departments";
+    const query = "SELECT * FROM departments";
     connection.query(query, (err, res) => {
         if (err) {
             console.error("Error:", err.message);
@@ -106,7 +106,7 @@ function viewAllDepartments() {
 
 // Function to view all roles
 function viewAllRoles() {
-    const query = "SELECT roles.title, roles.id, departments.department_name, roles.salary FROM employeetracker_db.roles JOIN employeetracker_db.departments ON roles.department_id = departments.id";
+    const query = "SELECT roles.title, roles.id, departments.department_name, roles.salary FROM roles JOIN departments ON roles.department_id = departments.id";
     connection.query(query, (err, res) => {
         if (err) {
             console.error("Error:", err.message);
@@ -122,10 +122,10 @@ function viewAllRoles() {
 function viewAllEmployees() {
     const query = `
     SELECT e.id, e.first_name, e.last_name, r.title, d.department_name, r.salary, CONCAT(m.first_name, ' ', m.last_name) AS manager_name
-    FROM employeetracker_db.employee e
-    LEFT JOIN employeetracker_db.roles r ON e.role_id = r.id
-    LEFT JOIN employeetracker_db.departments d ON r.department_id = d.id
-    LEFT JOIN employeetracker_db.employee m ON e.manager_id = m.id;
+    FROM employee e
+    LEFT JOIN roles r ON e.role_id = r.id
+    LEFT JOIN departments d ON r.department_id = d.id
+    LEFT JOIN employee m ON e.manager_id = m.id;
     `;
     connection.query(query, (err, res) => {
         if (err) {
@@ -147,7 +147,7 @@ function addDepartment() {
             message: "Enter the name of the new department:",
         })
         .then((answer) => {
-            const query = "INSERT INTO employeetracker_db.departments (department_name) VALUES (?)";
+            const query = "INSERT INTO departments (department_name) VALUES (?)";
             connection.query(query, [answer.name], (err, res) => {
                 if (err) {
                     console.error("Error:", err.message);
@@ -163,7 +163,7 @@ function addDepartment() {
 // Function to add a role
 function addRole() {
     // Retrieve list of departments from the database
-    connection.query("SELECT * FROM employeetracker_db.departments", (err, res) => {
+    connection.query("SELECT * FROM departments", (err, res) => {
         if (err) {
             console.error("Error:", err.message);
             start();
@@ -192,7 +192,7 @@ function addRole() {
                 },
             ])
             .then((answers) => {
-                const query = "INSERT INTO employeetracker_db.roles (title, salary, department_id) VALUES (?, ?, ?)";
+                const query = "INSERT INTO roles (title, salary, department_id) VALUES (?, ?, ?)";
                 connection.query(query, [answers.title, answers.salary, answers.department_id], (err, res) => {
                     if (err) {
                         console.error("Error:", err.message);
@@ -209,14 +209,14 @@ function addRole() {
 // Function to add an employee
 function addEmployee() {
     // Retrieve list of roles from the database
-    connection.query("SELECT * FROM employeetracker_db.roles", (err, resRoles) => {
+    connection.query("SELECT * FROM roles", (err, resRoles) => {
         if (err) {
             console.error("Error:", err.message);
             start();
             return;
         }
         // Retrieve list of employees from the database to use as managers
-        connection.query("SELECT * FROM employeetracker_db.employee", (err, resEmployee) => {
+        connection.query("SELECT * FROM employee", (err, resEmployees) => {
             if (err) {
                 console.error("Error:", err.message);
                 start();
@@ -257,7 +257,7 @@ function addEmployee() {
                     },
                 ])
                 .then((answers) => {
-                    const query = "INSERT INTO employeetracker_db.employee (first_name, last_name, role_id, manager_id) VALUES (?, ?, ?, ?)";
+                    const query = "INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?, ?, ?, ?)";
                     connection.query(query, [answers.firstName, answers.lastName, answers.roleId, answers.managerId], (err, res) => {
                         if (err) {
                             console.error("Error:", err.message);
@@ -275,14 +275,14 @@ function addEmployee() {
 // Function to add a Manager
 function addManager() {
     // Retrieve list of departments from the database
-    connection.query("SELECT * FROM employeetracker_db.departments", (err, resDepartments) => {
+    connection.query("SELECT * FROM departments", (err, resDepartments) => {
         if (err) {
             console.error("Error:", err.message);
             start();
             return;
         }
         // Retrieve list of employees from the database
-        connection.query("SELECT * FROM employeetracker_db.employee", (err, resEmployees) => {
+        connection.query("SELECT * FROM employee", (err, resEmployees) => {
             if (err) {
                 console.error("Error:", err.message);
                 start();
@@ -310,7 +310,7 @@ function addManager() {
                     },
                 ])
                 .then((answers) => {
-                    const query = "UPDATE employeetracker_db.employee SET is_manager = 1 WHERE id = ?";
+                    const query = "UPDATE employee SET is_manager = 1 WHERE id = ?";
                     connection.query(query, [answers.employeeId], (err, res) => {
                         if (err) {
                             console.error("Error:", err.message);
@@ -328,14 +328,14 @@ function addManager() {
 // Function to update an employee role
 function updateEmployeeRole() {
     // Retrieve list of employees from the database
-    connection.query("SELECT * FROM employeetracker_db.employee", (err, resEmployees) => {
+    connection.query("SELECT * FROM employee", (err, resEmployees) => {
         if (err) {
             console.error("Error:", err.message);
             start();
             return;
         }
         // Retrieve list of roles from the database
-        connection.query("SELECT * FROM employeetracker_db.roles", (err, resRoles) => {
+        connection.query("SELECT * FROM roles", (err, resRoles) => {
             if (err) {
                 console.error("Error:", err.message);
                 start();
@@ -363,7 +363,7 @@ function updateEmployeeRole() {
                     },
                 ])
                 .then((answers) => {
-                    const query = "UPDATE employeetracker_db.employee SET role_id = ? WHERE id = ?";
+                    const query = "UPDATE employee SET role_id = ? WHERE id = ?";
                     connection.query(query, [answers.roleId, answers.employeeId], (err, res) => {
                         if (err) {
                             console.error("Error:", err.message);
@@ -377,4 +377,3 @@ function updateEmployeeRole() {
         });
     });
 }
-
